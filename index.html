@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I LOVE YOU SIDRA💚 </title>
+    <link href="https://fonts.cdnfonts.com/css/8bit-wonder" rel="stylesheet">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/8bit-wonder');
+        body {
+            position: relative;
+            background-color: rgb(255, 162, 176);
+        }
+        #first-pic {
+            height: 45vh;
+            width: 40vh;
+            position: absolute;
+            top: 50vh;
+        }
+        #first-pic:hover {
+            cursor: pointer;
+        }
+        #second-pic {
+            height: 25vh;
+            width: 25vh;
+            position: absolute;
+            top: 39vh;
+            right: 95vh;
+        }
+        #second-pic:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+        #output {
+            position: absolute;
+            top: 70vh;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            color: rgb(0, 0, 0);
+            font-family: '8BIT WONDER', sans-serif;
+        }
+        #here {
+            height: 50vh;
+            width: 50vh;
+            position: absolute;
+            top: 50vh;
+            right: 1vh;
+        }
+        #s1 {
+            height: 100px;
+            opacity: 0;
+        }
+       
+        /* Speech Bubble Styles */
+        @font-face {
+            font-family: "silkscreen";
+            src: url('https://dl.dropbox.com/s/l0frac4d7bz3zx6/silkscreen.ttf');
+        }
+        :root {
+            --Speech-Bubble-Border: #222;
+            --Speech-Bubble-Background: #fcfcfc;
+            --Speech-Bubble-Text: #000;
+        }
+        #speech-bubble {
+            width: 200px;
+            min-height: 100px;
+            position: absolute;
+            top: 37vh;
+            right: 10vh;
+            background: var(--Speech-Bubble-Background);
+            border: 2px solid var(--Speech-Bubble-Border);
+            border-radius: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            transition: width 0.3s, height 0.3s;
+        }
+        #speech-txt {
+            font-family: 'silkscreen', sans-serif;
+            font-size: 12px;
+            color: var(--Speech-Bubble-Text);
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        #speech-arrow {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid var(--Speech-Bubble-Border);
+        }
+        
+        /* Arrow Styles */
+        #arrow {
+            width: 90px;
+            height: 100px;
+            position: absolute;
+            top: 25vh;
+            right: 102vh;
+            animation: float 1.5s ease-in-out infinite; /* Add animation */
+        }
+
+        /* Keyframes for the floating animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0); /* Start and end at the original position */
+            }
+            50% {
+                transform: translateY(-10px); /* Move up by 10px */
+            }
+        }
+    </style>
+</head>
+<body>
+    <img id="arrow" src="arrow.png" alt="arrow">
+    <div id="speech-bubble">
+        <div id="speech-txt"></div>
+        <div id="speech-arrow"></div>
+    </div>
+    <img id="first-pic" src="couple.png" alt="people.jpg">
+    <img id="second-pic" src="letter.png" alt="love.jpg">
+    <div id="output"></div>
+    <img id="here" src="rabbit.png" alt="bunny.png">
+    <img id="s1" src="sedra1.jpg" alt="1">
+    <script>
+        document.getElementById("first-pic").addEventListener("click", function () {
+            document.getElementById("s1").style.opacity = "1";
+        });
+
+        function typeWriter(text, index, targetElement, callback) {
+            if (index < text.length) {
+                targetElement.innerHTML += text.charAt(index);
+                setTimeout(function () {
+                    typeWriter(text, index + 1, targetElement, callback);
+                }, 50); // Delay of 50ms
+            } else if (callback) {
+                callback();
+            }
+        }
+
+        // Automatically start the typewriter effect for the speech bubble when the page loads
+        window.onload = function () {
+            let bubbleText = "Click that letter over there to read my message! 💌";
+            typeWriter(bubbleText, 0, document.getElementById("speech-txt"), function () {
+                // Adjust the size of the speech bubble dynamically
+                let bubble = document.getElementById("speech-bubble");
+                bubble.style.width = "auto";
+                bubble.style.height = "auto";
+            });
+        };
+
+        // Add click event listener to the letter image
+        document.getElementById("second-pic").addEventListener("click", function () {
+            // Change the image to the opened letter
+            this.src = "openletter.png";
+            document.getElementById("arrow").style.opacity="0";
+
+            // Clear any existing text in the output div
+            document.getElementById("output").innerHTML = "";
+
+            // Define the message for the output div
+            let outputText = "Dear Sister, I just wanted to tell you how much I love you! 💚 You mean the world to me, and I'm so grateful to have you in my life. Thank you for always being there for me. Love you to the moon and back!";
+
+            // Start the typewriter effect for the output div
+            typeWriter(outputText, 0, document.getElementById("output"));
+        });
+    </script>
+</body>
+</html>
